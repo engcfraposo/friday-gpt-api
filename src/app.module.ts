@@ -5,6 +5,7 @@ import { AzureOpenAIModule } from './utils/azure-openai/azure-openai.module';
 import { OpenAiModule } from './utils/openai/openai.module';
 import { ChatModule } from './chat/chat.module';
 import { ConfigModule } from '@nestjs/config';
+import { WsModule } from './ws/ws.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
     AzureOpenAIModule,
     OpenAiModule,
     ChatModule,
+    WsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

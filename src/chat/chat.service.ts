@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { OpenAiService } from 'src/utils/openai/openai.service';
 import { AzureOpenAIService } from 'src/utils/azure-openai/azure-openai.service';
-import { Server } from 'socket.io';
+import { WSGateway } from 'src/ws/ws.gateway';
 
 @Injectable()
 export class ChatService {
   constructor(
     private readonly openAiService: OpenAiService,
     private readonly azureOpenAiService: AzureOpenAIService,
+    private readonly ws: WSGateway,
   ) {}
   async transcribeAudio(audio: Buffer) {
     const startTime = Date.now();
@@ -17,9 +17,12 @@ export class ChatService {
       `[${new Date(startTime)}] - Iniciando o processo de transcrição do bot`,
     );
     const result = await this.azureOpenAiService.transcribe(audio);
+
     console.log(
       `[${new Date(startTime)}] - Finalizando o processo de transcrição do bot`,
     );
+    const message = { e: result.text };
+    this.ws.sendMessage(JSON.stringify(message));
     return result;
   }
 
@@ -64,6 +67,10 @@ export class ChatService {
       }`,
     );
     const result = await this.openAiService.askGpt(createChatDto);
+
+    const message = { r: result.choices[0].message.content };
+    this.ws.sendMessage(JSON.stringify(message));
+
     console.log(
       `[${
         Date.now() - startTime
