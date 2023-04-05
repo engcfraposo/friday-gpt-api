@@ -72,7 +72,6 @@ export class AzureOpenAIService {
           resolve(audioData);
         },
         (err) => {
-          console.error('[getTts]', err);
           synthesizer.close();
           synthesizer = null;
           reject(err);
