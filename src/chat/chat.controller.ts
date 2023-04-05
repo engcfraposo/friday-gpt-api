@@ -12,20 +12,41 @@ import { CreateChatDto } from './dto/create-chat.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { FileChatDto } from './dto/file-chat.dto';
-import internal from 'stream';
 
 @Controller('chat')
 export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 
   @Post('/ask')
-  askToGpt(@Body() createChatDto: CreateChatDto) {
-    return this.chatService.askToGpt(createChatDto);
+  async askToGpt(@Body() createChatDto: CreateChatDto) {
+    const startTime = Date.now();
+    console.log(
+      `[${new Date(startTime)}] - Iniciando o controlador de consulta ao GPT`,
+    );
+    const result = this.chatService.askToGpt(createChatDto);
+    console.log(
+      `[${
+        Date.now() - startTime
+      } ms] - Finalizando o controlador de consulta ao GPT`,
+    );
+    return result;
   }
 
   @Post('/image')
-  generateImg(@Body() createChatDto: CreateChatDto) {
-    return this.chatService.generateImg(createChatDto);
+  async generateImg(@Body() createChatDto: CreateChatDto) {
+    const startTime = Date.now();
+    console.log(
+      `[${new Date(
+        startTime,
+      )}] - Iniciando o controlador de geração de Imagem do DALL.E`,
+    );
+    const result = this.chatService.generateImg(createChatDto);
+    console.log(
+      `[${
+        Date.now() - startTime
+      } ms] - Finalizando o controlador de geração de Imagem do DALL.E`,
+    );
+    return result;
   }
 
   @Post('/text-to-speech')
@@ -33,13 +54,23 @@ export class ChatController {
     @Body() createChatDto: CreateChatDto,
     @Res() res: Response,
   ) {
+    const startTime = Date.now();
+    console.log(
+      `[${new Date(
+        startTime,
+      )}] - Iniciando o controlador de conversão de texto para audio`,
+    );
     const result = await this.chatService.textToSpeech(createChatDto);
 
     res.set({
       'Content-Type': 'audio/mpeg',
       'Transfer-Encoding': 'chunked',
     });
-
+    console.log(
+      `[${
+        Date.now() - startTime
+      } ms] - finalizando o controlador de conversão de texto para audio`,
+    );
     result.pipe(res);
   }
 
@@ -51,8 +82,19 @@ export class ChatController {
   })
   @UseInterceptors(FileInterceptor('file'))
   async audioToText(@UploadedFile() file: any) {
+    const startTime = Date.now();
+    console.log(
+      `[${new Date(
+        startTime,
+      )}] - Iniciando o controlador de conversão de audio para texto`,
+    );
     const audio = file.buffer;
     const transcription = await this.chatService.transcribeAudio(audio);
+    console.log(
+      `[${
+        Date.now() - startTime
+      } ms] - finalizando o controlador de conversão de audio para texto`,
+    );
     return transcription;
   }
 
