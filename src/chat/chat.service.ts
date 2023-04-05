@@ -85,7 +85,6 @@ export class ChatService {
         Date.now() - startTime
       } ms] - Finalizando o processo de consulta ao BOT por audio`,
     );
-    console.log(transcribe)
     if (
       transcribe.text.includes('imagem') ||
       transcribe.text.includes('Imagem')

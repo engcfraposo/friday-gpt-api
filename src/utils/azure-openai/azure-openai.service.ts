@@ -32,7 +32,6 @@ export class AzureOpenAIService {
     return new Promise<any>((resolve, reject) => {
       recognizer.recognized = (_, event) => {
         if (event.result.reason === ResultReason.RecognizedSpeech) {
-          console.log(event.result)
           const text = event.result.text.replace('\n', '');
           resolve({ text });
         }
