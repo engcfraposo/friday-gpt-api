@@ -1,6 +1,8 @@
 # Friday GPT API
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/engcfraposo/friday-gpt-api)
+![GitHub top language](https://img.shields.io/github/languages/top/engcfraposo/friday-gpt-api?style=flat-square)
+[![The MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](http://github.com/engcfraposo/friday-gpt-api/LICENSE)
 
 This is an API that uses NestJS with access to the ChatGPT, Dall-e, and Azure cognitive services (text-to-speech and speech-to-text). The API is able to generate text, images, speech, and transcription from speech.
 
