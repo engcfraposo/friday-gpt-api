@@ -63,14 +63,7 @@ export class AzureOpenAIService {
       synthesizer.speakTextAsync(
         text,
         (result) => {
-          if (result.reason === ResultReason.SynthesizingAudioCompleted) {
-            console.log('[getTts] synthesis finished.');
-          } else {
-            console.error(
-              '[getTts] Speech synthesis canceled, ' +
-                result.errorDetails +
-                '\nDid you set the speech resource key and region values?',
-            );
+          if (result.reason !== ResultReason.SynthesizingAudioCompleted) {
             reject(result.errorDetails);
             return;
           }
