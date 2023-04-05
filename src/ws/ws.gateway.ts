@@ -5,7 +5,7 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Server, WebSocket } from 'ws';
+import { WebSocket } from 'ws';
 
 @WebSocketGateway(3333)
 export class WSGateway
