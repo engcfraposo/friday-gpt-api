@@ -52,4 +52,4 @@ The following endpoints are available:
 
 ## License
 
-This project is [MIT licensed](https://chat.openai.com/chatLICENSE).
+This project is [MIT licensed](https://github.com/engcfraposo/friday-gpt-api/LICENSE).
