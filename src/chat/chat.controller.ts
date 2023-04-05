@@ -17,7 +17,7 @@ import { FileChatDto } from './dto/file-chat.dto';
 export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 
-  @Post('/ask')
+  @Post('/ask-gpt')
   async askToGpt(@Body() createChatDto: CreateChatDto) {
     const startTime = Date.now();
     console.log(
@@ -32,7 +32,7 @@ export class ChatController {
     return result;
   }
 
-  @Post('/image')
+  @Post('/generate-image')
   async generateImg(@Body() createChatDto: CreateChatDto) {
     const startTime = Date.now();
     console.log(
@@ -74,7 +74,7 @@ export class ChatController {
     result.pipe(res);
   }
 
-  @Post('/transcribe')
+  @Post('/transcribe-text')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'Arquivo de Audio',
@@ -98,7 +98,7 @@ export class ChatController {
     return transcription;
   }
 
-  @Post('/bot')
+  @Post('/ask-bot')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'Arquivo de Audio',

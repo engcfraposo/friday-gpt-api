@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { OpenAiService } from 'src/utils/openai/openai.service';
 import { AzureOpenAIService } from 'src/utils/azure-openai/azure-openai.service';
+import { Server } from 'socket.io';
 
 @Injectable()
 export class ChatService {
