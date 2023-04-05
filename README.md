@@ -4,6 +4,10 @@
 
 This is an API that uses NestJS with access to the ChatGPT, Dall-e, and Azure cognitive services (text-to-speech and speech-to-text). The API is able to generate text, images, speech, and transcription from speech.
 
+## Who is Friday?
+
+Tony Stark's AI assistant, FRIDAY, stands for "Female Replacement Intelligent Digital Assistant Youth." The character first appeared in the Marvel Cinematic Universe (MCU) film "Avengers: Age of Ultron." FRIDAY was voiced by actress Kerry Condon in the movies.
+
 ## Technologies
 
 This project was built with:
