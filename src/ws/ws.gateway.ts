@@ -36,6 +36,6 @@ export class WSGateway
   sendMessage(data: string) {
     const startTime = Date.now();
     console.log(`[${new Date(startTime)}] - enviando mensagem para clientes`);
-    this.client.send(data);
+    //this.client.send(data);
   }
 }
